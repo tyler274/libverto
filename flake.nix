@@ -8,6 +8,12 @@
     let
       systems = nixpkgs.lib.systems.flakeExposed;
       forAllSystems = nixpkgs.lib.genAttrs systems;
+      version =
+        let
+          cfg = builtins.readFile ./configure.ac;
+          m = builtins.match ".*AC_INIT\\([^,]+, ([^)]+)\\).*" cfg;
+        in
+        nixpkgs.lib.removePrefix " " (nixpkgs.lib.elemAt m 0);
     in
     {
       packages = forAllSystems (
@@ -17,6 +23,7 @@
             inherit system;
           };
           libverto = pkgs.callPackage ./nix/package.nix {
+            inherit version;
             src = self;
           };
         in

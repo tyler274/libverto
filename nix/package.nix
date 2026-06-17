@@ -12,7 +12,10 @@
   glibSupport ? true,
   libevSupport ? true,
   libeventSupport ? true,
-  version ? "0.3.2",
+  version ? "0.3.3",
+  # Note: nix/package.nix still has the fetchFromGitHub hash for the 0.3.2 tarball
+  # that only matters when fetching upstream by tag, not for local src = self builds. 
+  # Update the hash after we tag and push 0.3.3.
   src ? fetchFromGitHub {
     owner = "latchset";
     repo = "libverto";
