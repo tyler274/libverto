@@ -613,10 +613,10 @@ verto_cleanup(void)
     module_record *record;
 
     mutex_lock(&loaded_modules_mutex);
-
+    
     for (record = loaded_modules; record; record = record->next) {
-        module_close(record->dll);
         free(record->filename);
+        module_close(record->dll);
     }
 
     vfree(loaded_modules);
