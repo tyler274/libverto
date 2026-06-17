@@ -31,3 +31,7 @@ tests/read
 tests/write
 
 INSTALL
+
+result
+result-*
+.direnv
